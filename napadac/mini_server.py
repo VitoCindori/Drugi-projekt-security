@@ -11,6 +11,7 @@ class Handler(BaseHTTPRequestHandler):
 HTTPServer(("localhost", 9000), Handler).serve_forever()    '''
 
 from flask import Flask, request, Response
+import os
 
 app = Flask(__name__)
 
@@ -48,4 +49,5 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(port=9000)
+    port = int(os.environ.get("PORT", 9000))
+    app.run(host="0.0.0.0", port=port)
