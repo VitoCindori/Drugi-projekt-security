@@ -1,21 +1,8 @@
-'''
-from http.server import BaseHTTPRequestHandler, HTTPServer
-
-class Handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        print("UKRADENO:", self.path)
-        console.log("UKRADENO:", self.path)
-        self.send_response(200)
-        self.end_headers()
-
-HTTPServer(("localhost", 9000), Handler).serve_forever()    '''
-
 from flask import Flask, request, Response
 import os
 
 app = Flask(__name__)
 
-# u memoriji cuvamo sve "ukradene" podatke
 log_entries = []
 
 
